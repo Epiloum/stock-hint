@@ -15,6 +15,8 @@ const db = maria.createConnection({
 });
 db.connect();
 
+app.use(express.static("public"));
+
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/html/index.html');
 })
@@ -92,14 +94,6 @@ app.get('/search', (req, res) => {
     });
   });
 });
-
-app.get('/images/check.png', (req, res) => {
-  res.sendFile(__dirname + '/images/check.png');
-})
-
-app.get('/images/no.png', (req, res) => {
-  res.sendFile(__dirname + '/images/no.png');
-})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
