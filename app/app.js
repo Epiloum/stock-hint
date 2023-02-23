@@ -22,7 +22,6 @@ app.get('/', (req, res) => {
 })
 
 app.get('/teams', (req, res) => {
-  console.log(process.env.DB_HOST);
   db.query('SELECT * FROM teams', function (err, rows, fields) {
     res.send(rows);
   });
