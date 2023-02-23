@@ -1,14 +1,17 @@
 const express = require('express')
 const maria = require('mysql')
+const path = require('path')
 const app = express()
 const port = 3000
 
+require("dotenv").config();
+
 const db = maria.createConnection({
-  host: '',
-  port: 3306,
-  user: '',
-  password: '',
-  database: ''
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PSWD,
+  database: process.env.DB_NAME
 });
 db.connect();
 
@@ -17,6 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/teams', (req, res) => {
+  console.log(process.env.DB_HOST);
   db.query('SELECT * FROM teams', function (err, rows, fields) {
     res.send(rows);
   });
@@ -31,7 +35,7 @@ app.get('/search', (req, res) => {
         'text': '팀 정보가 잘못되었습니다.',
         'chance': 0
       });
-      
+
       return true;
     }
 
@@ -41,7 +45,7 @@ app.get('/search', (req, res) => {
         'text': '남은 검색횟수가 없습니다.',
         'chance': 0
       });
-      
+
       return true;
     }
 
