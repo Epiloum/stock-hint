@@ -2,7 +2,7 @@ const express = require('express')
 const maria = require('mysql')
 const path = require('path')
 const app = express()
-const port = 3000
+const port = 80
 
 require("dotenv").config();
 
